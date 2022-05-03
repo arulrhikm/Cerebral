@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Mob.gd" type="Script" id=2]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://art/House In a Forest Loop.ogg" type="AudioStream" id=5]
+[ext_resource path="res://art/gameover.wav" type="AudioStream" id=6]
+
+[sub_resource type="PackedScene" id=1]
+_bundled = {
+"conn_count": 0,
+"conns": PoolIntArray(  ),
+"editable_instances": [  ],
+"names": PoolStringArray( "Mob", "CanvasLayer", "mobs", "script", "TextLabel", "Label", "margin_left", "margin_top", "margin_right", "margin_bottom", "text", "TextEdit", "TextEdit", "margin_left", "margin_top", "margin_right", "margin_bottom", "text" ),
+"node_count": 3,
+"node_paths": [ NodePath("."), NodePath(".") ],
+"nodes": PoolIntArray( -1, -1, 1, 0, -1, 1, 3, 0, 1, 2, 1073741824, 0, 5, 4, -1, 5, 6, 1, 7, 2, 8, 3, 9, 4, 10, 5, 0, 1073741825, 0, 12, 11, -1, 5, 13, 6, 14, 7, 15, 8, 16, 9, 17, 10, 0 ),
+"variants": [ ExtResource( 2 ), 56.0, 54.0, 438.0, 240.0, "Question", 98.0, 448.0, 380.0, 552.0, "Enter Answer:" ],
+"version": 2
+}
+
+[node name="Trivia" type="Node"]
+script = ExtResource( 1 )
+mob_scene = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.905882, 0.713726, 0.682353, 1 )
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="HUD" parent="." instance=ExtResource( 4 )]
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="quit_game" from="HUD" to="." method="_on_HUD_quit_game"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="start_trivia" from="HUD" to="." method="_on_HUD_start_trivia"]
