@@ -18,11 +18,14 @@ func _ready():
 	$Trivia/HUD/CanvasLayer/Calculus.hide()
 	$Trivia/HUD/CanvasLayer/ColorRect.hide()
 	$Trivia/HUD/CanvasLayer/Label.hide()
-	$Level/Platforms.hide()
-	$Level/Platforms2.hide()
-	$Level/Player.hide()
-	$Level/ParallaxBackground/ParallaxLayer.hide()
 	$Level/ParallaxBackground/ParallaxLayer/Sprite.hide()
+	$Level/Label.hide()
+	$Level/Label2.hide()
+	$Level/Label3.hide()
+	$Level/Platforms.hide()
+	$Level/Player.hide()
+	
+	
 
 func _on_Button_pressed():
 	$Button.hide()
@@ -48,11 +51,13 @@ func _on_Button2_pressed():
 	$Button.hide()
 	$Button2.hide()
 	$Label.hide()
+	$Level/ParallaxBackground/ParallaxLayer/Sprite.show()
+	$Level/Label.show()
+	$Level/Label2.show()
+	$Level/Label3.show()
 	$Level/Platforms.show()
 	$Level/Player.show()
-	$Level/ParallaxBackground/ParallaxLayer.show()
-	$Level/ParallaxBackground/ParallaxLayer/Sprite.show()
-	$Level/Platforms2.show()
+	
 	
 func _on_Trivia_trivia():
 	$Trivia/HUD/CanvasLayer/ColorRect.hide()

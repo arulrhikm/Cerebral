@@ -26,6 +26,10 @@ shortcut = SubResource( 3 )
 size = 40
 font_data = ExtResource( 2 )
 
+[sub_resource type="DynamicFont" id=12]
+size = 22
+font_data = ExtResource( 2 )
+
 [sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 2 )
 
@@ -39,10 +43,6 @@ font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=11]
 size = 44
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=12]
-size = 22
 font_data = ExtResource( 2 )
 
 [node name="HUD" type="CanvasLayer"]
@@ -98,6 +98,16 @@ align = 1
 [node name="Timer" type="Timer" parent="."]
 wait_time = 100.0
 
+[node name="Menu" type="Button" parent="."]
+anchor_right = 0.025
+anchor_bottom = 0.023
+margin_left = 175.0
+margin_top = 570.0
+margin_right = 296.0
+margin_bottom = 610.44
+custom_fonts/font = SubResource( 12 )
+text = "Menu"
+
 [node name="Quit" type="Button" parent="."]
 margin_left = 184.0
 margin_top = 564.0
@@ -135,23 +145,13 @@ custom_fonts/font = SubResource( 11 )
 text = "High Score:"
 align = 1
 
-[node name="Menu" type="Button" parent="."]
-anchor_right = 0.025
-anchor_bottom = 0.023
-margin_left = 175.0
-margin_top = 570.0
-margin_right = 296.0
-margin_bottom = 610.44
-custom_fonts/font = SubResource( 12 )
-text = "Menu"
-
 [node name="CanvasLayer" parent="." instance=ExtResource( 3 )]
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
 [connection signal="text_entered" from="LineEdit" to="." method="_on_LineEdit_text_entered"]
-[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
 [connection signal="pressed" from="Menu" to="." method="_on_Menu_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
 [connection signal="alg" from="CanvasLayer" to="." method="_on_CanvasLayer_alg"]
 [connection signal="ari" from="CanvasLayer" to="." method="_on_CanvasLayer_ari"]
 [connection signal="calc" from="CanvasLayer" to="." method="_on_CanvasLayer_calc"]
