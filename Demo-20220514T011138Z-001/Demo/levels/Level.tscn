@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/bck.png" type="Texture" id=2]
+[ext_resource path="res://levels/Level.gd" type="Script" id=3]
+[ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://keyboardpress.tscn" type="PackedScene" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 19
+font_data = ExtResource( 4 )
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 0, 512 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( -27, -273 )
+scale = Vector2( 1.78437, 1.96094 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 209, 119 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 263.0
+margin_top = 7.0
+margin_right = 346.0
+margin_bottom = 65.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+align = 1
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 41.0
+margin_top = 64.0
+margin_right = 443.0
+margin_bottom = 103.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+align = 1
+autowrap = true
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 128.0
+margin_top = 15.0
+margin_right = 292.0
+margin_bottom = 54.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "High Score:"
+
+[node name="keyboardpress" parent="." instance=ExtResource( 5 )]
+position = Vector2( 139, 610 )
