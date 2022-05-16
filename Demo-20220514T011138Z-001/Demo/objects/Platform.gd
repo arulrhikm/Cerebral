@@ -6,6 +6,7 @@ extends KinematicBody2D
 var rand5
 var array1 = []
 var array2 = []
+var rand6
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -39,7 +40,7 @@ func _ready():
 	$Sprite8.set_position(Vector2(rand4, 569))
 	$CollisionShape2D8.set_position(Vector2(rand4, 569))
 	rand5 = rng.randi_range(0, 3)
-	var rand6 = rng.randi_range(0, 74)
+	rand6 = rng.randi_range(0, 74)
 	var rand7 = rng.randi_range(-50, 50)
 	var rand8 = rng.randi_range(-50, 50)
 	var rand9 = rng.randi_range(-50, 50)

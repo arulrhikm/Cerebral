@@ -1,5 +1,9 @@
 extends CanvasLayer
 
+var accuracy = 0.0
+var xp = 0
+var currency = 0
+
 func _ready():
 	randomize()
 	$Trivia/ColorRect.hide()
@@ -25,6 +29,8 @@ func _ready():
 	$Level/Platforms.hide()
 	$Level/Player.hide()
 	$Level/keyboardpress.hide()
+	$XP.show()
+	$XP.set_text("XP: " + str(xp))
 	
 	
 
@@ -74,3 +80,29 @@ func _on_Trivia_trivia():
 	$Trivia/HUD/StartButton.show()
 	$Trivia/HUD/Menu.show()
 	$Trivia/HUD/Label3.show()
+func _process(_delta):
+	var rng = RandomNumberGenerator.new()
+	var scoreTriv = $Trivia/HUD.score 
+	var countTriv = $Trivia/HUD.line
+	var scoreJumper = $Level.score
+	#var countJumper = $Level.rand6
+	# Trivia calculations:
+	#accuracy = (scoreTriv / countTriv)
+	# calculates accuracy of study session
+	# calculate XP:
+	#(probably need some XP label in one of the corners)
+	xp += (countTriv * 150 + rng.randi_range(1,99))
+	# calculate currency
+	# need label too lol in the corner or smth
+	currency += (accuracy * 100 + rng.randi_range(1,10))
+	
+	
+	# Platform Jumper calculations:
+	#accuracy = (scoreJumper / countJumper)
+	# calculates accuracy of study session
+	# calculate XP:
+	#(probably need some XP label in one of the corners)
+	#xp += (countJumper * 150 + rng.randi_range(1,99))
+	# calculate currency
+	# need label too lol in the corner or smth
+	currency += (accuracy * 100 + rng.randi_range(1,10))

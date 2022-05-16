@@ -50,6 +50,11 @@ text = "Doodle Jump"
 
 [node name="Level" parent="." instance=ExtResource( 3 )]
 
+[node name="XP" type="Label" parent="."]
+margin_right = 207.0
+margin_bottom = 32.0
+text = "XP: "
+
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]
 [connection signal="quit" from="Trivia" to="." method="_on_Trivia_quit"]

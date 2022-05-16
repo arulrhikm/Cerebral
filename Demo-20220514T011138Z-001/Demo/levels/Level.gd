@@ -2,6 +2,7 @@ extends Node2D
 
 var score =0
 var highscore = 0
+
 onready var width: = get_viewport_rect().size.x
 onready var height: = get_viewport_rect().size.y
 
@@ -42,7 +43,7 @@ func _physics_process(delta:float)->void:
 		move_background(move)
 		player.global_position.y += move
 		for plat in platforms:
-			$Label2.set_text(plat.array1[plat.rand5])
+			$Label2.set_text(plat.array1[plat.rand6])
 			plat.global_position.y += move
 			if player.is_on_floor():
 				if plat.rand5 == 0:
