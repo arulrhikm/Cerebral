@@ -44,16 +44,21 @@ margin_top = 510.0
 margin_right = 376.0
 margin_bottom = 623.0
 custom_fonts/font = SubResource( 3 )
-text = "Doodle Jump"
+text = "Platform Jump"
 
 [node name="Trivia" parent="." instance=ExtResource( 4 )]
 
 [node name="Level" parent="." instance=ExtResource( 3 )]
 
 [node name="XP" type="Label" parent="."]
-margin_right = 207.0
-margin_bottom = 32.0
+margin_right = 250.0
+margin_bottom = 33.0
 text = "XP: "
+
+[node name="Currency" type="Label" parent="."]
+margin_left = 272.0
+margin_right = 473.0
+margin_bottom = 18.0
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]

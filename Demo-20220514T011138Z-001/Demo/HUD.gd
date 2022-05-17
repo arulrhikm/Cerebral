@@ -6,18 +6,23 @@ var highscore = 0
 var line = 0;
 var array1: Array = []
 var array2: Array = []
+var accuracy
+var count = 0
 signal start_game
 signal quit_game
 signal start_trivia
 
 func _ready():
 	$Label.set_text(str($Timer.get_time_left()))
+	# sets up the timer label as soon as the game starts/is called
 
 func _process(_delta):
 	$Label.set_text(str($Timer.get_time_left()).pad_decimals(0))
+	# always updating the time label with the correct time left
 
 	if score>highscore:
 		highscore = score
+	# always checking if a new high score was achieved
 
 func show_message(text, wait):
 	$MessageLabel.set_position(Vector2(30, 210))
@@ -30,6 +35,7 @@ func show_message(text, wait):
 	$MessageTimer.wait_time = wait
 	$MessageLabel.show()
 	$MessageTimer.start()
+	# function for displaying the text with the time variable
 
 func show_game_over():
 	show_message(array1[1], 10)
@@ -39,8 +45,10 @@ func show_game_over():
 
 func update_score(x):
 	$ScoreLabel.text = str(x)
+	# updates score with new text
 
 func _on_StartButton_pressed():
+	# upon start button pressed, a new file is opened and separated into question and answers for the trivia
 	$StartButton.hide()
 	$Menu.hide()
 	var index = 0
@@ -66,6 +74,7 @@ func _on_MessageTimer_timeout():
 
 func checkanswer(text):
 	if text == array2[line]:
+		# checks if the user response is the same as the answer to see if correct
 		$MessageLabel.text = "Correct"
 		var font = $MessageLabel.get("custom_fonts/font")
 		font.size = 59
@@ -80,15 +89,17 @@ func checkanswer(text):
 		$MessageLabel.show()
 
 	line+=1
+	count+=1
 	yield(get_tree().create_timer(1.0), "timeout")
 	$Timer.wait_time = 200.0
 	$LineEdit.clear()
 	new_question()
 
 func new_question():
+	# constructs a new question with new q&a
 	var font = $MessageLabel.get("custom_fonts/font")
 	font.size = 27
-	show_message(array1[line], 200.0)
+	show_message(str(array1[line]), 200.0)
 	$LineEdit.show()
 	$Timer.start()
 
@@ -101,6 +112,7 @@ func _on_LineEdit_text_entered(_new_text):
 	checkanswer($LineEdit.text)
 
 func _on_Quit_pressed():
+	# closes and hides function when game is over (quit)
 	array1.clear()
 	array2.clear()
 	$LineEdit.clear()
@@ -119,30 +131,55 @@ func _on_Quit_pressed():
 	$MessageLabel.text = "Classic\nTrivia"
 	var font = $MessageLabel.get("custom_fonts/font")
 	font.size = 59
+	
+	"""
+	var rng = RandomNumberGenerator.new()
+	# Trivia calculations:
+	if count > 0:
+		accuracy = (score / count)
+		# calculates accuracy of study session
+		# calculate XP:
+		#(probably need some XP label in one of the corners)
+		$Trivia/TriviaMain.xp += (count * 150 + rng.randi_range(1,99))
+		# calculate currency
+		# need label too lol in the corner or smth
+		$Trivia/TriviaMain.currency += (accuracy * 100 + rng.randi_range(1,10))
+	var main = load("res://scripts/TriviaMain.gd")
+	$main_node.calculate(score, count)
+	"""
 
 func _on_Menu_pressed():
+	# quits game
 	emit_signal("quit_game")
 
 func _on_CanvasLayer_start():
+	# starts game
 	emit_signal("start_trivia")
 
 func _on_CanvasLayer_alg():
+	# sets trivia topic for algebra
 	whether = 1
 
 func _on_CanvasLayer_ari():
+	# sets trivia topic for arithmetic
 	whether = 2
 
 func _on_CanvasLayer_calc():
+	# sets trivia topic for calculus
 	whether = 3
 
 func _on_CanvasLayer_prob():
+	# sets trivia topic for probability
 	whether = 4
 
 func file():
+	# sets the file for trivia up
 	var rng = RandomNumberGenerator.new()
 	var file
 	rng.randomize()
-
+	
+	
+	# enters the defined trivia topic and chooses set randomly from said topic
 	if whether == 1:
 		var rand = rng.randi_range(0, 7)
 		if rand == 0:

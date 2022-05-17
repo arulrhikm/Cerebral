@@ -7,6 +7,7 @@ var rand5
 var array1 = []
 var array2 = []
 var rand6
+var count = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,6 +26,8 @@ func _ready():
 
 		index+=1
 	file.close()
+	# read problems from the files (recognizes first line is problem, second line is question)
+	
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var rand = rng.randi_range(25, 453)
@@ -39,6 +42,8 @@ func _ready():
 	var rand4 = rng.randi_range(25, 453)
 	$Sprite8.set_position(Vector2(rand4, 569))
 	$CollisionShape2D8.set_position(Vector2(rand4, 569))
+	# fixes platforms at varied x coordinates with fixed y coordinates
+
 	rand5 = rng.randi_range(0, 3)
 	rand6 = rng.randi_range(0, 74)
 	var rand7 = rng.randi_range(-50, 50)
@@ -64,8 +69,11 @@ func _ready():
 		$Label2.set_text(str(rand7))
 		$Label3.set_text(str(rand8))
 		$Label.set_text(str(rand9))
+	# sets values for the answer choices
+
 
 func file():
+	# randomizes which subtopic the math problems will be called from
 	var rng2 = RandomNumberGenerator.new()
 	var file
 	rng2.randomize()
@@ -80,8 +88,8 @@ func file():
 			file = "res://assets//mathematics_dataset-v1.0/train-medium/arithmetic__add_sub_multiple.txt"
 	if rand == 4:
 			file = "res://assets//mathematics_dataset-v1.0/train-medium/arithmetic__nearest_integer_root.txt"
-	
+	count+=1
 
-	return file 
+	return file
 
 
